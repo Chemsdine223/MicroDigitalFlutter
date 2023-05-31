@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -107,28 +108,37 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             backgroundColor: Colors.white,
-            bottomNavigationBar: BottomNavigationBar(
-              fixedColor: Colors.black,
-              elevation: 0.0,
+            bottomNavigationBar: CurvedNavigationBar(
+              // fixedColor: Colors.black,
+              // elevation: 0.0,
               backgroundColor: Colors.white,
-              currentIndex: _selectedIndex,
+              color: Colors.teal,
+              index: _selectedIndex,
               onTap: navigateBottomBar,
-              items: [
-                BottomNavigationBarItem(
-                    icon: const Icon(FluentSystemIcons.ic_fluent_home_filled),
-                    label: AppLocalizations.of(context)!.translate('Home')),
-                BottomNavigationBarItem(
-                    icon: const Icon(
-                      FluentSystemIcons.ic_fluent_briefcase_filled,
-                    ),
-                    label: AppLocalizations.of(context)!
-                        .translate('Request a loan')),
-                BottomNavigationBarItem(
-                    icon: const Icon(
-                      FluentSystemIcons.ic_fluent_clock_filled,
-                    ),
-                    label: AppLocalizations.of(context)!
-                        .translate('Loan history')),
+              items: const [
+                Icon(
+                  color: Colors.white,
+                  FluentSystemIcons.ic_fluent_home_filled,
+                ),
+                // BottomNavigationBarItem(
+                //     icon: const
+                //     label: AppLocalizations.of(context)!.translate('Home')),
+                // BottomNavigationBarItem(
+                // icon:
+                Icon(
+                  FluentSystemIcons.ic_fluent_briefcase_filled,
+                  color: Colors.white,
+                ),
+                // label: AppLocalizations.of(context)!
+                //     .translate('Request a loan')),
+                Icon(
+                  color: Colors.white,
+                  FluentSystemIcons.ic_fluent_clock_filled,
+                ),
+                // BottomNavigationBarItem(
+                //     icon:
+                //     label: AppLocalizations.of(context)!
+                //         .translate('Loan history')),
               ],
             ),
             body: SafeArea(

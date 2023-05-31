@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
 import '../../auth/Models/loan_model.dart';
 import '../../auth/authservices.dart';
 import '../../loanData/loan_data_service.dart';

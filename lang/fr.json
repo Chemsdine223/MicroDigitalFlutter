@@ -4,6 +4,7 @@
     "Dont't have an account ? ":"Vous n'avez pas de compte ?",
     "Request a loan": "Demander un prêt",
     "Request info":"Demande info",
+    "Interest rate":"Taux d'interêt",
     "Loan history": "Historique",
     "Please enter a valid loan amount":"Entrez un montant valide !",
     "Please enter a valid interest rate": "Entrez un taux valid",
@@ -11,6 +12,7 @@
     "Successfully created !":"Crée avec succéss !",
     "Created successfully !":"Crée avec succéss !",
     "Amount": "Montant",
+    "Amount (in MRO)":"Montant (en MRO)",
     "Intrest rate": "Taux d'intérêt",
     "Repayment method": "Méthode de remboursement",
     "Continue": "Continuer",
@@ -44,5 +46,12 @@
     "Sign up": "S'inscrire",
     "Login": "Se connecter",
     "Don't have an account ?": "Vous n'avez pas de compte ?",
-    "Create one": "Créer un compte"
+    "Create one": "Créer un compte",
+    "Start simulation": "Commencer la simulation",
+    "Monthly payment": "Paiment mensuel",
+    "Personal loan":"Prêt personnel",
+    "Real estate":"Immobilier",
+    "Car loan":"Prêt de vehicule",
+    "Interst rate":"Taux d'interêt",
+    "Duration":"Durée"
 }

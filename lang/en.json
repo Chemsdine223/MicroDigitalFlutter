@@ -3,12 +3,14 @@
     "Home": "Home",
     "Please enter a valid loan amount":"Please enter a valid loan amount",
     "Please enter a valid interest rate": "Please enter a valid interest rate",
+    "Interest rate":"Interest rate",
     "Please enter a date !":"Please enter a date !",
     "Created successfully !":"Created successfully !", 
     "Successfully created !":"Successfully created !",
     "Request a loan": "Request a loan",
     "loan history": "loan history",
     "Amount": "Amount",
+    "Amount (in MRO)":"Amount (in MRO)",
     "Loan history":"Loan history",
     "Intrest rate": "Intrest rate",
     "Repayment method": "Repayment method",
@@ -48,5 +50,13 @@
     "Sign up": "Sign up",
     "Login": "Login",
     "Don't have an account ?": "Don't have an account ?",
-    "Create one": "Create one"
+    "Create one": "Create one",
+    "Monthly payment": "Monthly payment",
+    "Start simulation": "Start simulation",
+    "Personal loan":"Personal loan",
+    "Real estate":"Real estate",
+    "Car loan":"Car loan",
+    "Interst rate":"Interst rate",
+    "Duration":"Duration"
+    
 }

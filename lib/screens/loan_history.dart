@@ -48,7 +48,7 @@ class _LoanHistoryState extends State<LoanHistory> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: MediaQuery.of(context).size.height / 10,
+                    height: MediaQuery.of(context).size.height / 16,
                     // color: Colors.red,
                     child: Center(
                       child: Text(

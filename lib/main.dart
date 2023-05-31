@@ -6,6 +6,7 @@ import 'package:microdigital/app_localizations.dart';
 import 'package:microdigital/auth/authservices.dart';
 // import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:microdigital/router/router.dart';
+
 // DDHR8JF47R4
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,9 +22,6 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => LoanCubit(),
       child: MaterialApp(
-        // onGenerateTitle: (context) {
-        //   // return AppLocalizations.of(context)!.appTitle;
-        // },
         localizationsDelegates: const [
           AppLocalizations.delegate,
           // AppLocalizations.delegate,
