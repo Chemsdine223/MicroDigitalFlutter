@@ -17,9 +17,6 @@ class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
   final passwordController = TextEditingController();
   final phoneController = TextEditingController();
-  
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                           icon: const Icon(Icons.lock),
                           label: AppLocalizations.of(context)!
                               .translate('Password'),
-                          maxLength: 8,
+                          maxLength: 20,
                           maxLines: 1,
                         ),
                       ],
@@ -166,5 +163,4 @@ class _LoginPageState extends State<LoginPage> {
           )),
     );
   }
-  
 }

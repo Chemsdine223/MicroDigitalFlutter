@@ -37,7 +37,10 @@ class AuthCubit extends Cubit<AuthState> {
 
       emit(AuthSuccess(response));
     } catch (e) {
-      emit(AuthError(errorMsg: 'Something went wrong ...'));
+      print(e);
+      emit(
+        AuthError(errorMsg: 'Something went wrong ...'),
+      );
     }
   }
 
@@ -63,8 +66,11 @@ class AuthCubit extends Cubit<AuthState> {
       );
 
       if (response) {
+        
         print(response);
-        emit(SignUpSuccess(success: 'Account created successfully...'));
+        emit(
+          SignUpSuccess(success: 'Account created successfully...'),
+        );
       }
     } catch (e) {
       print(e);

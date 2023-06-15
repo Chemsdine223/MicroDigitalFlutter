@@ -38,10 +38,12 @@ class _HomePageState extends State<HomePage> {
     double denominator = pow(1 + monthlyInterestRate, numberOfPayments) - 1;
     double monthlyPayment = principal * (numerator / denominator);
 
-    setState(() {
-      this.monthlyPayment = monthlyPayment;
-      months = numberOfPayments.toInt();
-    });
+    setState(
+      () {
+        this.monthlyPayment = monthlyPayment;
+        months = numberOfPayments.toInt();
+      },
+    );
   }
 
   // double calculateMonthlyPayment() {

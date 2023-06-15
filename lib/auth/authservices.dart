@@ -42,7 +42,7 @@ class AuthService {
     );
     final data = jsonDecode(response.body);
     // print(data);
-
+    print(data);
     accessToken = data['access'];
     id = data['id'].toString();
     OneSignal.shared.setExternalUserId(id);
@@ -57,7 +57,6 @@ class AuthService {
       // debugPrint(response.body);
       // debugPrint(data['nni']);
       // refreshToken = data['refresh'];
-
       // await loadTokens();
       return user;
     } else {
@@ -140,7 +139,6 @@ class AuthService {
     await prefs.setString('access_token', accessToken);
     await prefs.setString('refresh_token', refreshToken);
     await prefs.setString('id', id);
-    
   }
 
   static Future<String> loadTokens() async {
