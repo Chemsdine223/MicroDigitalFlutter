@@ -37,13 +37,17 @@ class _LogicState extends State<Logic> {
         },
         builder: (context, state) {
           if (state is AuthLoading) {
+            print('object1');
             return const LoadingScreen();
           } else if (state is AuthSuccess) {
+            print('object2');
             return const HomeScreen();
           } else if (state is FirstTimeUser) {
+            print('object3'); 
             // Navigator.pushReplacementNamed(context, '/login');
             return const SplashScreen();
           } else {
+            print('object4');
             return const LoginPage();
           }
         },

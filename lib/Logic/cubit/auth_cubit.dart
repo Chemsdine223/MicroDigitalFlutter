@@ -9,7 +9,7 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial()) {
-    checkStatus();
+    // checkStatus();
   }
 
   Future<void> checkStatus() async {
@@ -38,9 +38,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthSuccess(response));
     } catch (e) {
       print(e);
-      emit(
-        AuthError(errorMsg: 'Something went wrong ...'),
-      );
+      emit(AuthError(errorMsg: 'Something went wrong ...'));
     }
   }
 
@@ -66,7 +64,6 @@ class AuthCubit extends Cubit<AuthState> {
       );
 
       if (response) {
-        
         print(response);
         emit(
           SignUpSuccess(success: 'Account created successfully...'),

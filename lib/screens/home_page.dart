@@ -46,27 +46,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // double calculateMonthlyPayment() {
-  //   if (numberOfMonths <= 0) {
-  //     return 0.0;
-  //   }
-  //   return loanAmount / numberOfMonths;
-  // }
-
-  // double calculateNumberOfMonths() {
-  //   if (monthlyPayment <= 0) {
-  //     return 0.0;
-  //   }
-  //   return loanAmount / monthlyPayment;
-  // }
-
-  // double calculateMinimumPayment() {
-  //   if (numberOfMonths <= 0) {
-  //     return 0.0;
-  //   }
-  //   return loanAmount / numberOfMonths;
-  // }
-
   double calculateMaximumPayment() {
     return loanAmount;
   }
@@ -77,116 +56,6 @@ class _HomePageState extends State<HomePage> {
       builder: (context, state) {
         return Scaffold(
           backgroundColor: Colors.white,
-          // body: Column(
-          //   children: [
-          //     Text(
-          //       'Loan Amount: \$${loanAmount.toStringAsFixed(0)}',
-          //       style: const TextStyle(fontSize: 18),
-          //     ),
-          //     Slider(
-          //       min: 1000,
-          //       max: 100000,
-          //       divisions: 10,
-          //       value: loanAmount,
-          //       onChanged: (value) {
-          //         setState(() {
-          //           loanAmount = value;
-          //           calculatePayment();
-          //         });
-          //       },
-          //     ),
-          //     Text(
-          //       'Interest Rate: ${interestRate.toStringAsFixed(1)}%',
-          //       style: const TextStyle(fontSize: 18),
-          //     ),
-          //     Slider(
-          //       min: 1,
-          //       max: 10,
-          //       divisions: 9,
-          //       value: interestRate,
-          //       onChanged: (value) {
-          //         setState(() {
-          //           interestRate = value;
-          //           calculatePayment();
-          //         });
-          //       },
-          //     ),
-          //     Text(
-          //       'Duration: ${duration.toStringAsFixed(0)} months',
-          //       style: const TextStyle(fontSize: 18),
-          //     ),
-          // Slider(
-          //   min: 1,
-          //   max: 60,
-          //   divisions: 59,
-          //   value: duration,
-          //   onChanged: (value) {
-          //     setState(() {
-          //       duration = value;
-          //       calculatePayment();
-          //     });
-          //   },
-          // ),
-          //     const SizedBox(height: 20),
-          //     Text(
-          //       'Monthly Payment: \$${monthlyPayment.toStringAsFixed(2)}',
-          //       style:
-          //           const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          //     ),
-          //     Text(
-          //       'Number of Months: $months',
-          //       style:
-          //           const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          //     ),
-
-          // Slider(
-          //   value: _loanAmountSlider,
-          //   min: 0,
-          //   max: 1,
-          //   onChanged: (value) {
-          //     setState(() {
-          //       _loanAmountSlider = value;
-          //       _loanAmount =
-          //           value * 2000000; // Scale the value to the desired range
-          //       _monthlyPayment = _loanAmount / _monthsToPay;
-          //       _monthlyPaymentSlider = _monthlyPayment /
-          //           2000000; // Scale the value to fit within the slider range
-          //     });
-          //   },
-          // ),
-          // Slider(
-          //   value: _monthlyPaymentSlider,
-          //   min: 1,
-          //   max: 1000000,
-          //   onChanged: (value) {
-          //     setState(() {
-          //       _monthlyPaymentSlider = value;
-          //       _monthlyPayment =
-          //           value * 2000000; // Scale the value to the desired range
-          //       _loanAmount = _monthlyPayment * _monthsToPay;
-          //       _loanAmountSlider = _loanAmount /
-          //           2000000; // Scale the value to fit within the slider range
-          //     });
-          //   },
-          // ),
-          // Slider(
-          //   value: _monthsToPaySlider,
-          //   min: 0,
-          //   max: 1,
-          //   onChanged: (value) {
-          //     setState(() {
-          //       _monthsToPaySlider = value;
-          //       _monthsToPay =
-          //           value * 83; // Scale the value to the desired range
-          //       _monthlyPayment = _loanAmount / _monthsToPay;
-          //       _monthlyPaymentSlider = _monthlyPayment /
-          //           2000000; // Scale the value to fit within the slider range
-          //     });
-          //   },
-          // ),
-          //   ],
-          // ),
-
           body: Column(
             children: [
               SingleChildScrollView(
@@ -515,20 +384,6 @@ class _HomePageState extends State<HomePage> {
                               });
                             },
                           ),
-
-                          // Image.asset(
-                          //   'Img/loan (1).png',
-                          //   height: MediaQuery.of(context).size.height / 3,
-                          // ),
-                          // Text(
-                          //   AppLocalizations.of(context)!
-                          //       .translate('Request a loan from an app !'),
-                          //   style: const TextStyle(
-                          //     fontFamily: 'QuickSand',
-                          //     fontSize: 20,
-                          //     fontWeight: FontWeight.bold,
-                          //   ),
-                          // )
                         ],
                       ),
                     ),
@@ -562,8 +417,9 @@ class _HomePageState extends State<HomePage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        const Text(
-                                          'Monthly Payment :',
+                                        Text(
+                                          AppLocalizations.of(context)!
+                                              .translate('Monthly Payment :'),
                                           style: TextStyle(
                                             fontFamily: 'QuickSand',
                                             fontSize: 30,

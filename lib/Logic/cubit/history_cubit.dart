@@ -28,7 +28,7 @@ class HistoryCubit extends Cubit<HistoryState> {
       }
     } catch (e) {
       print('This is an error ---------');
-      emit(HistoryInitial());
+      // emit(HistoryInitial());
     }
   }
 }

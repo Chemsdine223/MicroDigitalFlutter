@@ -13,7 +13,7 @@ class LoanCubit extends Cubit<LoanState> {
 
   Future<void> checkLoan() async {
     emit(LoanLoading());
-    await Future.delayed(const Duration(seconds: 2));
+    // await Future.delayed(const Duration(seconds: 1));
     await AuthService.loadTokens();
     final bool hasLoan = await LoanRepository().hasLoan();
 
@@ -26,7 +26,7 @@ class LoanCubit extends Cubit<LoanState> {
         );
       }
     } catch (e) {
-      // emit(LoanInitial());
+      // emit(LoanError());
     }
   }
 

@@ -1,4 +1,5 @@
 {
+    "ID":"NNI",
     "Request a loan from an app !": "Demandez votre prêt d'ici !",
     "Home": "Accueil",
     "Dont't have an account ? ":"Vous n'avez pas de compte ?",
@@ -53,5 +54,18 @@
     "Real estate":"Immobilier",
     "Car loan":"Prêt de vehicule",
     "Interst rate":"Taux d'interêt",
-    "Duration":"Durée"
+    "Duration":"Durée",
+    "Change your password":"Changez votre mot de passe",
+    "Last name":"Prenom",
+    "First name":"Nom",
+    "Old password":"Ancien mot de passe",
+    "New password":"Nouvel mot de passe",
+    "Enter your old password":"Enterez votre ancien mot de passe",
+    "Enter your new password":"Enterez votre nouveau mot de passe",
+    "Change":"Changer",
+    "Reset password":"Changez votre mot de passe",
+    "Created successfully!":"Crée avec succès",
+    "Monthly Payment :":"Paiement mensuel :"
+    
+
 }

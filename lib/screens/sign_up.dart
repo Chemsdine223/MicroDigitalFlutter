@@ -1,16 +1,12 @@
-// import 'package:flutter/material.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:microdigital/Logic/cubit/auth_cubit.dart';
 import 'package:microdigital/auth/authservices.dart';
 
 import '../app_localizations.dart';
-import '../components/text_field.dart';
 
 class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+  const SignUp({Key? key}) : super(key: key);
 
   @override
   State<SignUp> createState() => _SignUpState();
@@ -18,55 +14,69 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   bool status = false;
-
-  Future<bool> submit() async {
-    final dynamic response = await AuthService.signUp(
-        nNNicontroller.text,
-        nomController.text,
-        phonecontroller.text,
-        prenomController.text,
-        password1controller.text,
-        password2controller.text);
-
-    if (response) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Created successfully !')));
-      setState(() {
-        status = response;
-      });
-      Navigator.pop(context);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Check the provided data !')));
-      setState(() {
-        status = response;
-      });
-    }
-    return status;
-  }
+  bool isLoading = false;
+  String? passwordError;
 
   final _formKey = GlobalKey<FormState>();
-  String imagePath = '';
-  XFile? image;
-  // File?(imagePath);
-  final picker = ImagePicker();
   TextEditingController nomController = TextEditingController();
   TextEditingController prenomController = TextEditingController();
   TextEditingController nNNicontroller = TextEditingController();
   TextEditingController phonecontroller = TextEditingController();
   TextEditingController password1controller = TextEditingController();
   TextEditingController password2controller = TextEditingController();
-  String validatePasswordsMatch(String? password, String? confirmPassword) {
-    if (password == null || password.isEmpty) {
-      return 'Password is required';
+
+  Future<bool> submit() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    final dynamic response = await AuthService.signUp(
+      nNNicontroller.text,
+      nomController.text,
+      phonecontroller.text,
+      prenomController.text,
+      password1controller.text,
+      password2controller.text,
+    );
+
+    if (response) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Created successfully!')),
+      );
+      setState(() {
+        status = response;
+        isLoading = false;
+      });
+      Navigator.pop(context);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Check the provided data!')),
+      );
+      setState(() {
+        status = response;
+        isLoading = false;
+      });
     }
-    if (confirmPassword == null || confirmPassword.isEmpty) {
-      return 'Confirm password is required';
-    }
+
+    return status;
+  }
+
+  String? validatePasswordsMatch(String? password, String? confirmPassword) {
     if (password != confirmPassword) {
       return 'Passwords do not match';
     }
-    return 'Passwords must match';
+    return null;
+  }
+
+  @override
+  void dispose() {
+    nNNicontroller.dispose();
+    nomController.dispose();
+    phonecontroller.dispose();
+    prenomController.dispose();
+    password1controller.dispose();
+    password2controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -84,7 +94,6 @@ class _SignUpState extends State<SignUp> {
             backgroundColor: Colors.white,
             appBar: AppBar(
               centerTitle: true,
-              // automaticallyImplyLeading: false,
               title: const Text(
                 'Sign up',
                 style: TextStyle(
@@ -101,14 +110,16 @@ class _SignUpState extends State<SignUp> {
             body: BlocListener<AuthCubit, AuthState>(
               listener: (context, state) {
                 if (state is AuthError) {
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(content: Text(state.errorMsg)));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(state.errorMsg)),
+                  );
                 } else if (state is SignUpSuccess) {
-                  // setState(() {});
                   Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(state.success),
-                  ));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.success),
+                    ),
+                  );
                 }
               },
               child: SafeArea(
@@ -116,118 +127,140 @@ class _SignUpState extends State<SignUp> {
                   padding: const EdgeInsets.all(8.0),
                   child: SingleChildScrollView(
                     child: SizedBox(
-                      // color: Colors.red,
                       height: MediaQuery.of(context).size.height,
                       child: Form(
                         key: _formKey,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            // GestureDetector(
-                            //   onDoubleTap: () {},
-                            // ),
-                            CustomTextField(
-                              validate: (value) {
+                            TextFormField(
+                              validator: (value) {
                                 if (value!.isEmpty) {
                                   return 'Enter your ID';
                                 }
-                                return '';
+                                return null;
                               },
-                              hideText: false,
                               controller: nNNicontroller,
-                              hintText: AppLocalizations.of(context)!
-                                  .translate('Enter your ID number'),
-                              label:
-                                  AppLocalizations.of(context)!.translate('ID'),
-                              icon: const Icon(Icons.credit_card),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: AppLocalizations.of(context)!
+                                    .translate('Enter your ID number'),
+                                labelText: AppLocalizations.of(context)!
+                                    .translate('ID'),
+                                prefixIcon: const Icon(Icons.credit_card),
+                              ),
                               maxLength: 10,
                               maxLines: 1,
                             ),
-                            CustomTextField(
-                              validate: (value) {
+                            TextFormField(
+                              validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'Enter a value';
+                                  return 'Enter your last name';
                                 }
-                                return '';
+                                return null;
                               },
-                              hideText: false,
                               controller: nomController,
-                              hintText: 'Enter your last name',
-                              label: 'Last name',
-                              icon: const Icon(Icons.person_2_outlined),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                prefixIcon: const Icon(Icons.person_2_outlined),
+                                // border: OutlineInputBorder(),
+                                hintText: 'Enter your last name',
+                                labelText: 'Last name',
+                              ),
                               maxLength: 40,
                               maxLines: 1,
                             ),
-                            CustomTextField(
-                              validate: (value) {
+                            TextFormField(
+                              validator: (value) {
                                 if (value!.isEmpty) {
                                   return 'Enter your name';
                                 }
-                                return '';
+                                return null;
                               },
-                              hideText: false,
                               controller: prenomController,
-                              hintText: AppLocalizations.of(context)!
-                                  .translate('Enter your name'),
-                              label: AppLocalizations.of(context)!
-                                  .translate('Name'),
-                              icon: const Icon(Icons.person_2_outlined),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: AppLocalizations.of(context)!
+                                    .translate('Enter your name'),
+                                labelText: AppLocalizations.of(context)!
+                                    .translate('Name'),
+                                prefixIcon: const Icon(Icons.person_2_outlined),
+                              ),
                               maxLength: 40,
                               maxLines: 1,
                             ),
-                            CustomTextField(
-                              validate: (value) {
+                            TextFormField(
+                              validator: (value) {
                                 final RegExp startsWith2or3or4 =
                                     RegExp(r'^[2-4]\d*$');
-                                if (value == null || value.isEmpty) {
+                                if (value!.isEmpty) {
                                   return 'Phone number is required';
                                 }
                                 if (!startsWith2or3or4.hasMatch(value)) {
                                   return 'Phone number must start with 2, 3, or 4';
                                 }
-                                return '';
+                                return null;
                               },
-                              hideText: false,
                               controller: phonecontroller,
-                              hintText: AppLocalizations.of(context)!
-                                  .translate('Phone number'),
-                              label: AppLocalizations.of(context)!
-                                  .translate('Phone'),
-                              icon: const Icon(Icons.phone),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: AppLocalizations.of(context)!
+                                    .translate('Phone number'),
+                                labelText: AppLocalizations.of(context)!
+                                    .translate('Phone'),
+                                prefixIcon: const Icon(Icons.phone),
+                              ),
                               maxLength: 8,
                               maxLines: 1,
                             ),
-                            CustomTextField(
-                              hideText: true,
+                            TextFormField(
+                              obscureText: true,
                               controller: password1controller,
-                              hintText: AppLocalizations.of(context)!
-                                  .translate('Enter your password'),
-                              label: AppLocalizations.of(context)!
-                                  .translate('Password'),
-                              icon: const Icon(Icons.lock_outline),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: AppLocalizations.of(context)!
+                                    .translate('Enter your password'),
+                                labelText: AppLocalizations.of(context)!
+                                    .translate('Password'),
+                                prefixIcon: const Icon(Icons.lock_outline),
+                              ),
                               maxLength: 20,
                               maxLines: 1,
-                              // validate: (value) => validatePasswordsMatch(
-                              //     value, password1controller.text),
+                              onChanged: (value) {
+                                setState(() {
+                                  passwordError = validatePasswordsMatch(
+                                    value,
+                                    password2controller.text,
+                                  );
+                                });
+                              },
                             ),
-                            CustomTextField(
-                              hideText: true,
+                            TextFormField(
+                              obscureText: true,
                               controller: password2controller,
-                              hintText: AppLocalizations.of(context)!
-                                  .translate('Confirm your password'),
-                              label: AppLocalizations.of(context)!
-                                  .translate('Confirm Password'),
-                              icon: const Icon(Icons.lock),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: AppLocalizations.of(context)!
+                                    .translate('Confirm your password'),
+                                labelText: AppLocalizations.of(context)!
+                                    .translate('Confirm Password'),
+                                prefixIcon: const Icon(Icons.lock),
+                                errorText: passwordError,
+                              ),
                               maxLength: 20,
                               maxLines: 1,
-                              // validate: (value) => validatePasswordsMatch(
-                              //     password2controller.text, value),
+                              onChanged: (value) {
+                                setState(() {
+                                  passwordError = validatePasswordsMatch(
+                                    password1controller.text,
+                                    value,
+                                  );
+                                });
+                              },
                             ),
                             BlocConsumer<AuthCubit, AuthState>(
                               listener: (context, state) {},
                               builder: (context, state) {
-                                // return Builder(
-                                // builder: (context) {
                                 return ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
                                   child: MaterialButton(
@@ -235,31 +268,33 @@ class _SignUpState extends State<SignUp> {
                                         MediaQuery.of(context).size.height / 14,
                                     minWidth: MediaQuery.of(context).size.width,
                                     color: Colors.teal,
-                                    onPressed: () {
-                                      if (!_formKey.currentState!.validate()) {
-                                        // submit();
-                                        // print('object');
-                                        context.read<AuthCubit>().signUp(
-                                              phonecontroller.text,
-                                              nNNicontroller.text,
-                                              password1controller.text,
-                                              password2controller.text,
-                                              nomController.text,
-                                              prenomController.text,
-                                            );
-                                      }
-                                    },
-                                    child: Text(
-                                      AppLocalizations.of(context)!
-                                          .translate('Sign up'),
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                                    onPressed: isLoading
+                                        ? null
+                                        : () async {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              setState(() {
+                                                isLoading = true;
+                                              });
+                                              bool success = await submit();
+                                              if (success) {
+                                                context
+                                                    .read<AuthCubit>()
+                                                    .signIn();
+                                              }
+                                            }
+                                          },
+                                    child: isLoading
+                                        ? CircularProgressIndicator()
+                                        : Text(
+                                            AppLocalizations.of(context)!
+                                                .translate('Sign up'),
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
                                   ),
                                 );
-                                // },
-                                // );
                               },
                             )
                           ],

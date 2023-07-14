@@ -7,7 +7,9 @@ import 'package:microdigital/auth/Models/user_model.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const apiUrl = 'http://127.0.0.1:8000/';
+// const apiUrl = 'https://chemsdine223.pythonanywhere.com/';
+const apiUrl = 'https://pubgmobilemmj.pythonanywhere.com';
+
 // const apiUrl = 'http://192.168.100.30:8000/';
 // 192.168.0.103:8000
 const loginUrl = '$apiUrl/users/login/';
@@ -44,49 +46,20 @@ class AuthService {
     // print(data);
     print(data);
     accessToken = data['access'];
+    refreshToken = data['refresh'];
     id = data['id'].toString();
     OneSignal.shared.setExternalUserId(id);
 
     await saveTokens();
-    // await loadTokens();
-    // refreshToken = data['refresh'];
 
     if (response.statusCode == 200) {
       final user = User.fromJson(data);
 
-      // debugPrint(response.body);
-      // debugPrint(data['nni']);
-      // refreshToken = data['refresh'];
-      // await loadTokens();
       return user;
     } else {
       throw data['message'].toString();
     }
   }
-
-  // static Future<String> login(String phone, String password) async {
-  //   final response = await http.post(
-  //     Uri.parse(loginUrl),
-  //     headers: {'Content-Type': 'application/json'},
-  //     body: jsonEncode({
-  //       'phone': phone,
-  //       'password': password,
-  //     }),
-  //   );
-  //   final data = jsonDecode(response.body);
-  //   if (response.statusCode == 200) {
-  //     accessToken = data['access'];
-  //     id = data['id'].toString();
-
-  //     debugPrint(response.body);
-  //     debugPrint(data['nni']);
-  //     refreshToken = data['refresh'];
-  //     await saveTokens();
-  //     return accessToken;
-  //   } else {
-  //     throw data['message'].toString();
-  //   }
-  // }
 
   static Future<bool> signUp(
     String nni,
@@ -116,8 +89,9 @@ class AuthService {
     if (response.statusCode == 200) {
       return true;
     } else {
-      print(response.body);
-      throw Exception('Failed to sign up');
+      return false;
+      // print(response.body);
+      // throw Exception('Failed to sign up');
     }
   }
 

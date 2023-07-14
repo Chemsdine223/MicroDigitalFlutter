@@ -29,17 +29,17 @@ class _RequestPageState extends State<RequestPage> {
   String? imagePath;
   String? bankId;
   String? selectedBank;
-  String dropdownValue = '1';
-  List<String> banks = ['1'];
+  // String dropdownValue = '1';
+  // List<String> banks = ['1'];
   final _formKey = GlobalKey<FormState>();
   final _formKey1 = GlobalKey<FormState>();
 
+  List<String> _bankNames = [];
   TextEditingController dateinput = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _intrestRateController = TextEditingController();
   final TextEditingController _methodController = TextEditingController();
-  final url = 'http://127.0.0.1:8000/transaction/getbanks/';
-  List<String> _bankNames = [];
+  final url = 'https://pubgmobilemmj.pythonanywhere.com/transaction/getbanks/';
   bool status = false;
 
 ////////////////////////////// logic ////////////////////////
@@ -578,7 +578,7 @@ class _RequestPageState extends State<RequestPage> {
                       InfoTile(
                         fieldName: AppLocalizations.of(context)!
                             .translate('Payment method'),
-                        fieldContent: '${_intrestRateController.text} ',
+                        fieldContent: '${_methodController.text} ',
                       ),
                     ],
                   ),
@@ -588,4 +588,12 @@ class _RequestPageState extends State<RequestPage> {
           ),
         ),
       ];
+
+  @override
+  void dispose() {
+    _amountController.dispose();
+    _intrestRateController.dispose();
+    _methodController.dispose();
+    super.dispose();
+  }
 }

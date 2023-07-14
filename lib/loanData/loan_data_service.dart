@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import '../auth/Models/bank_model.dart';
 import '../auth/authservices.dart';
 
-const apiUrl = 'http://127.0.0.1:8000/';
+const apiUrl = 'https://pubgmobilemmj.pythonanywhere.com';
 const loanUrl = '$apiUrl/transaction/loans/';
 const bankUrl = '$apiUrl/getBanks';
 const loansMade = '$apiUrl/transaction/loans/';
@@ -56,8 +56,8 @@ class LoanRepository {
   }
 
   Future<List<Bank>> fetchBankList() async {
-    final response = await http
-        .get(Uri.parse('http://127.0.0.1:8000/transaction/getbanks/'));
+    final response = await http.get(Uri.parse(
+        'https://pubgmobilemmj.pythonanywhere.com/transaction/getbanks/'));
     if (response.statusCode == 200) {
       List<dynamic> jsonList = jsonDecode(response.body);
       List<Bank> bankList = jsonList.map((e) => Bank.fromJson(e)).toList();
@@ -78,7 +78,7 @@ class LoanRepository {
     }
     final response = await http.get(
         Uri.parse(
-          'http://127.0.0.1:8000/transaction/loans/${AuthService.id}',
+          'https://pubgmobilemmj.pythonanywhere.com/transaction/loans/${AuthService.id}',
         ),
         headers: {'Authorization': 'Bearer ${AuthService.accessToken}'});
     await AuthService.loadTokens();

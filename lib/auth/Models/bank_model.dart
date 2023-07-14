@@ -6,7 +6,6 @@ class Bank {
     this.nom,
   });
 
-  // factory Bank.fromJson(String source) => Bank.fromMap(json.decode(source));
   factory Bank.fromJson(Map<String, dynamic> json) {
     return Bank(id: json['id'], nom: json['nom']);
   }

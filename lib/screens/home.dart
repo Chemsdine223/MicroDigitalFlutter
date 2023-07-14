@@ -3,6 +3,7 @@ import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:microdigital/Logic/cubit/auth_cubit.dart';
+import 'package:microdigital/screens/profil.dart';
 import 'package:microdigital/screens/request.dart';
 
 import '../app_localizations.dart';
@@ -24,12 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  final List<Widget> _pages = const [
-    HomePage(),
-    RequestPage(),
-    // LoadingScreen()
-    LoanHistory()
-  ];
+  final List<Widget> _pages = const [HomePage(), RequestPage(), LoanHistory()];
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +88,28 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     ListTile(
                       onTap: () {
+                        print('${state.user.prenom} +++++++++++++');
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return ProfilPage(
+                                nom: state.user.nom,
+                                prenom: state.user.prenom,
+                                nni: state.user.nni);
+                          },
+                        ));
+                      },
+                      leading: const Icon(Icons.person_outlined),
+                      title: Text(
+                        'Profil',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'QuickSand',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () {
                         context.read<AuthCubit>().logOut();
                         debugPrint('Bye');
                       },
@@ -100,6 +118,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         AppLocalizations.of(context)!.translate('Sign out'),
                         style: const TextStyle(
                           fontSize: 20,
+                          fontFamily: 'QuickSand',
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -120,25 +140,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.white,
                   FluentSystemIcons.ic_fluent_home_filled,
                 ),
-                // BottomNavigationBarItem(
-                //     icon: const
-                //     label: AppLocalizations.of(context)!.translate('Home')),
-                // BottomNavigationBarItem(
-                // icon:
                 Icon(
                   FluentSystemIcons.ic_fluent_briefcase_filled,
                   color: Colors.white,
                 ),
-                // label: AppLocalizations.of(context)!
-                //     .translate('Request a loan')),
                 Icon(
                   color: Colors.white,
                   FluentSystemIcons.ic_fluent_clock_filled,
                 ),
-                // BottomNavigationBarItem(
-                //     icon:
-                //     label: AppLocalizations.of(context)!
-                //         .translate('Loan history')),
               ],
             ),
             body: SafeArea(
@@ -153,156 +162,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-// import 'package:flutter/material.dart';
-
-// import '../auth/authservices.dart';
-
-// class HomeScreen extends StatefulWidget {
-//   const HomeScreen({super.key});
-
-//   @override
-//   State<HomeScreen> createState() => _HomeScreenState();
-// }
-
-// class _HomeScreenState extends State<HomeScreen> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: SafeArea(
-//         child: SingleChildScrollView(
-//           child: HomeLayout(),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// class HomeLayout extends StatelessWidget {
-//   HomeLayout({
-//     super.key,
-//   });
-
-//   final TextEditingController _phoneController = TextEditingController();
-//   final TextEditingController _passwordController = TextEditingController();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.all(24.0),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Image.asset(
-//             'Img/dollar.png',
-//             height: 70,
-//           ),
-//           const SizedBox(
-//             height: 50,
-//           ),
-//           Text(
-//             'Hi, Welcome Back !',
-//             style: TextStyle(
-//               fontSize: 34,
-//               fontWeight: FontWeight.bold,
-//               color: Colors.blueGrey[900],
-//               // textAlign: Alignment.center,
-//             ),
-//           ),
-//           const SizedBox(
-//             height: 30,
-//           ),
-//           const Text(
-//             'Numéro du téléphone :',
-//             style: TextStyle(
-//               fontSize: 16,
-//             ),
-//           ),
-//           const SizedBox(
-//             height: 28,
-//           ),
-//           TextField(
-//             controller: _phoneController,
-//             decoration: const InputDecoration(
-//               border: OutlineInputBorder(),
-//             ),
-//           ),
-//           const SizedBox(
-//             height: 28,
-//           ),
-//           const Text(
-//             'Mot de passe :',
-//             style: TextStyle(
-//               fontSize: 16,
-//             ),
-//           ),
-//           const SizedBox(
-//             height: 28,
-//           ),
-//           TextField(
-//             controller: _passwordController,
-//             obscureText: true,
-//             decoration: const InputDecoration(
-//               border: OutlineInputBorder(),
-//             ),
-//           ),
-//           const SizedBox(
-//             height: 28,
-//           ),
-//           const Text('Mot de passe oublié ?'),
-//           const SizedBox(
-//             height: 28,
-//           ),
-//           Align(
-//             alignment: Alignment.center,
-//             child: GestureDetector(
-//               onTap: () {
-//                 AuthService.login(
-//                   _phoneController.text,
-//                   _passwordController.text,
-//                 );
-//                 // debugdebugPrint('Hi there !');
-//               },
-//               child: Container(
-//                 decoration: BoxDecoration(
-//                   color: Colors.blue[800],
-//                   borderRadius: const BorderRadius.all(
-//                     Radius.circular(20),
-//                   ),
-//                 ),
-//                 height: 100,
-//                 width: 400,
-//                 child: const Align(
-//                   alignment: Alignment.center,
-//                   child: Text(
-//                     'CONNEXION',
-//                     style: TextStyle(
-//                       color: Colors.white,
-//                       fontSize: 26,
-//                       fontWeight: FontWeight.bold,
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           ),
-//           const SizedBox(
-//             height: 20,
-//           ),
-//           RichText(
-//             text: TextSpan(children: [
-//               const TextSpan(
-//                 text: 'Vous n\'avez pas de compte ? ',
-//                 style: TextStyle(color: Colors.black),
-//               ),
-//               TextSpan(
-//                 text: 'Creer un compte',
-//                 style: TextStyle(color: Colors.blue[700]),
-//               ),
-//             ]),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }

@@ -29,7 +29,7 @@
     "Refused": "Refused",
     "Phone":"Phone",
     "ID":"ID",
-    "Name":"Name",
+    "First name":"First name",
     "Phone number":"Phone number",
     "Password":"Password",
     "Enter your passcode":"Enter your passcode",
@@ -57,6 +57,16 @@
     "Real estate":"Real estate",
     "Car loan":"Car loan",
     "Interst rate":"Interst rate",
-    "Duration":"Duration"
+    "Duration":"Duration",
+    "Change your password":"Change your password",
+    "Last name":"Last name",
+    "Old password":"Old password",
+    "New password":"New password",
+    "Enter your old password":"Enter your old password",
+    "Enter your new password":"Enter your new password",
+    "Change":"Change",
+    "Reset password":"Reset password",
+    "Monthly Payment :":"Monthly Payment :",
+    "Created successfully!":"Created successfully!"
     
 }

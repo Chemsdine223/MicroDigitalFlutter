@@ -14,10 +14,6 @@ class BottomNav extends StatelessWidget {
       onTabChange: (value) => onTabChange!(value),
       color: Colors.white,
       mainAxisAlignment: MainAxisAlignment.center,
-      // activeColor: Colors.blueGrey[100],
-      // tabBackgroundColor: Colors.grey,
-      // tabBorderRadius: 24,
-      // tabActiveBorder: Border.all(color: Colors.white),
       tabs: const [
         GButton(
           icon: Icons.home,
