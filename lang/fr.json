@@ -65,7 +65,11 @@
     "Change":"Changer",
     "Reset password":"Changez votre mot de passe",
     "Created successfully!":"Crée avec succès",
-    "Monthly Payment :":"Paiement mensuel :"
-    
+    "Monthly Payment :":"Paiement mensuel :",
+    "Changed successfully":"Changé avec succès",
+    "An error occurred":"Une erreur est survenue",
+    "Password is required":"Le mot de passe est requis",
+    "Phone number must start with 2, 3, or 4":"Le numéro de téléphone doit commencer avec 2, 3, or 4"
+
 
 }

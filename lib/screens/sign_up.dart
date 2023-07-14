@@ -136,7 +136,8 @@ class _SignUpState extends State<SignUp> {
                             TextFormField(
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'Enter your ID';
+                                  return AppLocalizations.of(context)!
+                                      .translate('Enter your ID number');
                                 }
                                 return null;
                               },
@@ -155,7 +156,8 @@ class _SignUpState extends State<SignUp> {
                             TextFormField(
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'Enter your last name';
+                                  return AppLocalizations.of(context)!
+                                      .translate('Enter your last name');
                                 }
                                 return null;
                               },
@@ -164,7 +166,8 @@ class _SignUpState extends State<SignUp> {
                                 border: OutlineInputBorder(),
                                 prefixIcon: const Icon(Icons.person_2_outlined),
                                 // border: OutlineInputBorder(),
-                                hintText: 'Enter your last name',
+                                hintText: AppLocalizations.of(context)!
+                                    .translate('Enter your last name'),
                                 labelText: 'Last name',
                               ),
                               maxLength: 40,
@@ -173,7 +176,8 @@ class _SignUpState extends State<SignUp> {
                             TextFormField(
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'Enter your name';
+                                  return AppLocalizations.of(context)!
+                                      .translate('Enter your name');
                                 }
                                 return null;
                               },
@@ -194,10 +198,12 @@ class _SignUpState extends State<SignUp> {
                                 final RegExp startsWith2or3or4 =
                                     RegExp(r'^[2-4]\d*$');
                                 if (value!.isEmpty) {
-                                  return 'Phone number is required';
+                                  return AppLocalizations.of(context)!
+                                      .translate('Phone number is required');
                                 }
                                 if (!startsWith2or3or4.hasMatch(value)) {
-                                  return 'Phone number must start with 2, 3, or 4';
+                                  return AppLocalizations.of(context)!.translate(
+                                      'Phone number must start with 2, 3, or 4');
                                 }
                                 return null;
                               },
@@ -227,12 +233,14 @@ class _SignUpState extends State<SignUp> {
                               maxLength: 20,
                               maxLines: 1,
                               onChanged: (value) {
-                                setState(() {
-                                  passwordError = validatePasswordsMatch(
-                                    value,
-                                    password2controller.text,
-                                  );
-                                });
+                                setState(
+                                  () {
+                                    passwordError = validatePasswordsMatch(
+                                      value,
+                                      password2controller.text,
+                                    );
+                                  },
+                                );
                               },
                             ),
                             TextFormField(
@@ -296,7 +304,7 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                 );
                               },
-                            )
+                            ),
                           ],
                         ),
                       ),

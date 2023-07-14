@@ -4,10 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../Logic/cubit/auth_cubit.dart';
 import '../app_localizations.dart';
-import '../components/text_field.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -51,45 +50,59 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               SizedBox(
-                // color: Colors.red,
                 height: MediaQuery.of(context).size.height / 4,
                 child: Form(
                   key: formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      CustomTextField(
-                        validate: (value) {
+                      TextFormField(
+                        maxLines: 1,
+                        maxLength: 8,
+                        validator: (value) {
                           final RegExp startsWith2or3or4 =
                               RegExp(r'^[2-4]\d*$');
                           if (value == null || value.isEmpty) {
-                            return 'Phone number is required';
+                            return AppLocalizations.of(context)!
+                                .translate('Phone number is required');
                           }
                           if (!startsWith2or3or4.hasMatch(value)) {
-                            return 'Phone number must start with 2, 3, or 4';
+                            return AppLocalizations.of(context)!.translate(
+                                'Phone number must start with 2, 3, or 4');
                           }
-                          return '';
+                          return null;
                         },
-                        textInputType: TextInputType.number,
-                        hideText: false,
+                        keyboardType: TextInputType.number,
                         controller: phoneController,
-                        hintText: AppLocalizations.of(context)!
-                            .translate('Enter your phone number'),
-                        label: AppLocalizations.of(context)!.translate('Phone'),
-                        icon: const Icon(Icons.phone),
-                        maxLength: 8,
-                        maxLines: 1,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: AppLocalizations.of(context)!
+                              .translate('Enter your phone number'),
+                          labelText:
+                              AppLocalizations.of(context)!.translate('Phone'),
+                          prefixIcon: const Icon(Icons.phone),
+                        ),
                       ),
-                      CustomTextField(
-                        hideText: true,
-                        controller: passwordController,
-                        hintText: AppLocalizations.of(context)!
-                            .translate('Enter your passcode'),
-                        icon: const Icon(Icons.lock),
-                        label:
-                            AppLocalizations.of(context)!.translate('Password'),
+                      TextFormField(
                         maxLength: 20,
                         maxLines: 1,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return AppLocalizations.of(context)!
+                                .translate('Password is required');
+                          }
+                          return null;
+                        },
+                        obscureText: true,
+                        controller: passwordController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: AppLocalizations.of(context)!
+                              .translate('Enter your passcode'),
+                          labelText: AppLocalizations.of(context)!
+                              .translate('Password'),
+                          prefixIcon: const Icon(Icons.lock),
+                        ),
                       ),
                     ],
                   ),
@@ -99,7 +112,6 @@ class _LoginPageState extends State<LoginPage> {
                 listener: (context, state) {},
                 builder: (context, state) {
                   return Column(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8),
@@ -108,15 +120,11 @@ class _LoginPageState extends State<LoginPage> {
                           minWidth: MediaQuery.of(context).size.width,
                           color: Colors.teal,
                           onPressed: () async {
-                            if (!formKey.currentState!.validate()) {
+                            if (formKey.currentState!.validate()) {
                               context.read<AuthCubit>().login(
                                   phoneController.text,
                                   passwordController.text);
-                              print(state);
                             }
-                            print('object');
-                            print(state);
-                            // print(state.toString());
                           },
                           child: Text(
                             AppLocalizations.of(context)!.translate('Login'),

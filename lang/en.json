@@ -67,6 +67,10 @@
     "Change":"Change",
     "Reset password":"Reset password",
     "Monthly Payment :":"Monthly Payment :",
-    "Created successfully!":"Created successfully!"
+    "Created successfully!":"Created successfully!",
+    "Changed successfully":"Changed successfully",
+    "An error occurred":"An error occurred",
+    "Password is required":"Password is required",
+    "Phone number must start with 2, 3, or 4":"Phone number must start with 2, 3, or 4"
     
 }

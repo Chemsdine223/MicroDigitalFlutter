@@ -313,7 +313,10 @@ class _ProfilPageState extends State<ProfilPage> {
                                                           .showSnackBar(
                                                         SnackBar(
                                                           content: Text(
-                                                              'Changed successfully'),
+                                                              AppLocalizations.of(
+                                                                      context)!
+                                                                  .translate(
+                                                                      'Changed successfully')),
                                                         ),
                                                       );
                                                     } else {
@@ -323,7 +326,11 @@ class _ProfilPageState extends State<ProfilPage> {
                                                           .showSnackBar(
                                                         SnackBar(
                                                           content: Text(
-                                                              'An error occurred'),
+                                                            AppLocalizations.of(
+                                                                    context)!
+                                                                .translate(
+                                                                    'An error occurred'),
+                                                          ),
                                                         ),
                                                       );
                                                     }
